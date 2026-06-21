@@ -2,40 +2,42 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'Node18'
+        nodejs 'Node18'   // must match the name you set in Global Tool Configuration
+    }
+
+    triggers {
+        githubPush()      // listens for GitHub webhook events
     }
 
     stages {
-
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'main', url: 'https://github.com/anubommi/SamplePOMProject.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                bat 'npm install'
             }
         }
 
-        stage('Install Playwright Browsers') {
+        stage('Run Playwright Tests') {
             steps {
-                sh 'npx playwright install'
+                bat 'npx playwright test'
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                sh 'npx playwright test'
-            }
-        }
-
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+            junit 'test-results/*.xml'   // publish test results if available
+            publishHTML(target: [
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                keepAll: true,
+                reportName: 'Playwright Test Report'
+            ])
         }
     }
 }
