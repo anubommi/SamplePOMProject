@@ -3,7 +3,7 @@ import { LoginPage } from '../Pages/loginpage';
 import { Homepage } from '../Pages/Homepage';
 import { CartPage } from '../Pages/cartpage';
 import * as testdata from '../testdata/data.json'; 
-test('Login Test', async ({ page }) => {
+test('Verify user can login and add product to cart', async ({ page }) => {
 
     const loginnpage = new LoginPage(page);
     await loginnpage.gotologinPage();
