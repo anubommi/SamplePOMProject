@@ -29,15 +29,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            junit 'test-results/*.xml'   // publish test results if available
-            publishHTML(target: [
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                keepAll: true,
-                reportName: 'Playwright Test Report'
-            ])
-        }
-    }
-}
+
