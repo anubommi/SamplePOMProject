@@ -29,10 +29,26 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test'
+                bat 'npx playwright test --reporter=html,junit'
             }
         }
     }
 
-   
+    post {
+        always {
+            // Publish JUnit results in Jenkins "Test Result" tab
+            junit 'test-results/*.xml'
+
+            // Publish Playwright HTML report in Jenkins sidebar
+            publishHTML(target: [
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                keepAll: true,
+                reportName: 'Playwright Test Report'
+            ])
+
+            // Archive the report artifacts for download
+            archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+        }
+    }
 }
