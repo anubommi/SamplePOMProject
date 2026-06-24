@@ -47,6 +47,11 @@ pipeline {
                 keepAll: true,
                 reportName: 'Playwright Test Report'
             ])
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'allure-results']]
+            ])
 
             // Archive the report artifacts for download
             archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
