@@ -34,6 +34,11 @@ pipeline {
         }
         
     }
+    stage('Generate Allure Report') {
+    steps {
+        bat 'allure generate allure-results --clean -o allure-report'
+    }
+}
 
     post {
         always {
@@ -42,10 +47,10 @@ pipeline {
 
             // Publish Playwright HTML report in Jenkins sidebar
             publishHTML(target: [
-                reportDir: 'playwright-report',
+                reportDir: 'allure-report',
                 reportFiles: 'index.html',
                 keepAll: true,
-                reportName: 'Playwright Test Report'
+                reportName: 'Allure Report'
             ])
             allure([
                 includeProperties: false,
