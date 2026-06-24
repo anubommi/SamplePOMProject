@@ -29,7 +29,7 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test --reporter=html,junit'
+                bat 'npx playwright test'
             }
         }
         
@@ -52,4 +52,10 @@ pipeline {
             archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
         }
     }
+    stage('Verify Reports') {
+  steps {
+    bat 'dir test-results'
+    bat 'dir playwright-report'
+  }
+}
 }
