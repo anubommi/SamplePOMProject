@@ -32,13 +32,13 @@ pipeline {
                 bat 'npx playwright test'
             }
         }
-        
-    }
-    stage('Generate Allure Report') {
+      stage('Generate Allure Report') {
     steps {
         bat 'allure generate allure-results --clean -o allure-report'
     }
-}
+}  
+    }
+    
 
     post {
         always {
