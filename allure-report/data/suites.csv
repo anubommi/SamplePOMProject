@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","7369","has title","chromium","2026-06-24","failed","2026-06-24","","example.spec.ts","",""
+"","4901","get started link","chromium","2026-06-24","passed","2026-06-24","","example.spec.ts","",""
+"","30068","Verify user can login and add product to cart","chromium","2026-06-24","broken","2026-06-24","","logintest.spec.ts","",""

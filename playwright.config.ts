@@ -27,7 +27,9 @@ export default defineConfig({
    
     ['list'],
     ['junit', { outputFile: 'test-results/results.xml' }],
-    ['html', { outputFolder: 'playwright-report' }]
+    ['html', { outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['allure-playwright', { outputFolder: 'allure-report' }]
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
