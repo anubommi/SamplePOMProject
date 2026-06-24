@@ -29,7 +29,7 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test --reporter=junit --reporter=html'
+                bat 'npx playwright test --reporter=html,junit'
             }
         }
         
@@ -38,7 +38,7 @@ pipeline {
     post {
         always {
             // Publish JUnit results in Jenkins "Test Result" tab
-            junit 'test-results/*.xml'
+            junit 'test-results/results.xml'
 
             // Publish Playwright HTML report in Jenkins sidebar
             publishHTML(target: [
