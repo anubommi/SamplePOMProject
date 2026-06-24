@@ -52,10 +52,5 @@ pipeline {
             archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
         }
     }
-    stage('Verify Reports') {
-  steps {
-    bat 'dir test-results'
-    bat 'dir playwright-report'
-  }
-}
+   
 }
